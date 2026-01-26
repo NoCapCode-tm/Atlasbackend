@@ -1,0 +1,47 @@
+import {Router} from "express"
+import { acknowledge, addsubtask, completetask, employeelogin, getsubtask, onboardingdetails, punchout, reviewtask, saveTime, sendcomment, startAttendance, submitreport, taskcompleted, updatetask, uploadTaskAttachment } from "../controller/Employee.controller.js"
+import { verifyjwt } from "../middleware/auth.middleware.js"
+import { getuser } from "../controller/Admin.controller.js"
+import { upload } from "../middleware/multer.middleware.js"
+
+const employeerouter = Router()
+//post api
+employeerouter.route("/login").post(employeelogin)
+employeerouter.route("/completedtask").post(verifyjwt,taskcompleted)
+employeerouter.route("/start-attendance").post(startAttendance)
+employeerouter.route("/save-time").post(saveTime)
+employeerouter.route("/punchout").post(punchout)
+employeerouter.route("/complete-task").post(completetask)
+employeerouter.route("/review-task").post(reviewtask)
+employeerouter.route("/addsubtask").post(verifyjwt,addsubtask)
+employeerouter.route("/acknowledged").post(acknowledge)
+employeerouter.route("/task/upload-attachment").post(verifyjwt,
+  upload.single("file"),
+  uploadTaskAttachment
+);
+employeerouter.route("/commentsend").post(sendcomment)
+employeerouter.route("/submitreport").post(submitreport)
+
+
+//put api
+employeerouter.route("/updatetask/:id").put(verifyjwt,updatetask)
+
+//get api
+employeerouter.route("/getuser").get(verifyjwt,getuser)
+employeerouter.route("/getsubtask").get(getsubtask)
+
+//patch api
+employeerouter.route("/onboarding/:step").patch(
+  verifyjwt,
+  upload.fields([
+    { name: "aadharimage", maxCount: 1 },
+    { name: "panimage", maxCount: 1 },
+    { name: "passportimage", maxCount: 1 },
+    { name: "collegeid", maxCount: 1 }
+  ]),
+  onboardingdetails
+);
+
+
+
+export {employeerouter}
