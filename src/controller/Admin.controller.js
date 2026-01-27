@@ -635,7 +635,7 @@ const addemployee = asynchandler(async(req,res)=>{
 
         <!-- CTA -->
         <div style="margin-top:32px; text-align:center;">
-          <a href="https://nocapcode.cloud/login" style="
+          <a href="https://nocapcode.cloud/#/login" style="
             display:inline-block;
             background:#111827;
             color:#FFFFFF;

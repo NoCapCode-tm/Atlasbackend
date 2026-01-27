@@ -40,8 +40,9 @@ app.use("/uploads", express.static("uploads"));
 
 import { adminrouter } from "./routes/Admin.routes.js"
 import { employeerouter } from "./routes/Employee.routes.js"
+import liverouteroute from "./routes/Live.routes.js";
 
-
+app.use("/api/v1/atlas", liverouteroute);
 app.use("/api/v1/admin",adminrouter)
 app.use("/api/v1/employee",employeerouter)
 
