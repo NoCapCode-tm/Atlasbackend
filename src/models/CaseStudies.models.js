@@ -19,4 +19,4 @@ const CaseSchema = mongoose.Schema({
     }
 },{timestamps:true})
 
-const Case = new mongoose.model("Case",CaseSchema)
+export const Case = new mongoose.model("Case",CaseSchema)

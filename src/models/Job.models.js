@@ -5,6 +5,10 @@ const JobSchema = mongoose.Schema({
         type:String,
         required:true,
     },
+    noofapplicants:{
+        type:Number,
+        required:true,
+    },
     description:{
         type:String,
         required:true,

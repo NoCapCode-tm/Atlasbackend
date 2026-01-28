@@ -4,6 +4,8 @@ import { Apiresponse } from "../utils/Apiresponse.utils.js";
 import { asynchandler } from "../utils/Asynchandler.utils.js";
 
 import { Applicant } from "../models/Applicant.models.js";
+import { Case } from "../models/CaseStudies.models.js";
+import { uploadToCloudinary } from "../utils/cloudinary.utils.js";
 
 export const createJob =asynchandler(async (req, res) => {
   try {
@@ -16,6 +18,7 @@ export const createJob =asynchandler(async (req, res) => {
       perks,
       whoshouldapply,
       employementtype,
+      noofapplicants
     } = req.body;
 
     if (
@@ -26,7 +29,8 @@ export const createJob =asynchandler(async (req, res) => {
       !department ||
       !perks ||
       !whoshouldapply ||
-      !employementtype
+      !employementtype ||
+      !noofapplicants
     ) {
       throw new Apierror(400,"Please fill all the required Fields")
     }
@@ -40,6 +44,7 @@ export const createJob =asynchandler(async (req, res) => {
       perks,
       whoshouldapply,
       employementtype,
+      noofapplicants
     });
 
      res.status(201)
@@ -126,10 +131,39 @@ export const getJobApplicants = asynchandler(async (req, res) => {
       throw new Apierror(404,"No Job Opening Found")
     }
 
-    req.status(200
+    res.status(200
         .json(new Apiresponse(201,"Applicants fetched Successfully",job.applicants))
     )
   } catch (error) {
     console.log("Something Went Wrong",error)
   }
 });
+
+export const addcasestudy = asynchandler(async(req,res)=>{
+  const{head,subhead,content}=req.body;
+  
+
+  if(!head ||!subhead || !content){
+    throw new Apierror(400,"Please fill all the required fields")
+  }
+
+  let thumbnail = ""
+
+  if (req.files?.thumbnail?.length > 0){
+    const upload = await uploadToCloudinary(
+              req.files.thumbnail[0].buffer,
+              "case-study/thumbnail"
+            );
+      thumbnail = upload.secure_url
+  }
+
+  const casestudy = await Case.create({
+    title:head,
+    subtitle:subhead,
+    thumbnail:thumbnail,
+    content:content
+  })
+
+  res.status(200)
+  .json(new Apiresponse(200,"Case study Added Successfully",casestudy))
+})
