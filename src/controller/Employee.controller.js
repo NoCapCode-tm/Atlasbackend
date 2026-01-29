@@ -26,9 +26,9 @@ const employeelogin = asynchandler(async(req,res)=>{
     throw new Apierror(404,"User not found")
   }
 
-  if(user.designation.name !== "Employee" ){
-    throw new Apierror(404,"User not Authorized to Access the portal")
-  }
+  // if(user.designation.name !== "Employee" ){
+  //   throw new Apierror(404,"User not Authorized to Access the portal")
+  // }
 
   const passwordcorrect = await user.isPasswordCorrect(password)
   if(!passwordcorrect){
