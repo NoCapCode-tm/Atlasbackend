@@ -115,8 +115,8 @@ export const getAllJobs = asynchandler(async (req, res) => {
   try {
     const jobs = await Job.find().sort({ createdAt: -1 });
 
-    req.status(200)
-    .json(new Apiresponse(201,"All job Fetched Successfully"))
+    res.status(200)
+    .json(new Apiresponse(201,"All job Fetched Successfully",jobs))
   } catch (error) {
     console.log("Something Went Wrong",error)
   }
@@ -166,4 +166,31 @@ export const addcasestudy = asynchandler(async(req,res)=>{
 
   res.status(200)
   .json(new Apiresponse(200,"Case study Added Successfully",casestudy))
+})
+
+export const getcasestudy = asynchandler(async(req,res)=>{
+  const casestudy = await Case.find()
+
+  if(!casestudy.length){
+    throw new Apierror(404,"No Case Study Found")
+  }
+
+  res.status(200)
+  .json(new Apiresponse(201,"Case Study Fetched Successfully",casestudy))
+})
+
+export const adminlogin = asynchandler(async(req,res)=>{
+    const{userid,password} = req.body
+
+  if(!userid || !password){
+    throw new Apierror(400,"Please fill all the required Details")
+  }
+
+  if(userid === process.env.ADMIN_LOGIN_ID  && password === process.env.ADMIN_PASSWORD){
+   res.status(200)
+  .json(new Apiresponse(201,"Login Successfull"))
+  }else{
+    throw new Apierror(401,"Unauthorized Access")
+  }
+  
 })
