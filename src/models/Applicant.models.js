@@ -36,8 +36,20 @@ const ApplicantSchema = mongoose.Schema({
         default:""
     },
    other:[{
-      type:String,
-   }]
+      key:{
+         type:String,
+         default:""
+      },
+      value:{
+         type:String,
+         default:""
+      },
+      default:[]
+   }],
+   jobtitle:{
+    type:String,
+    required:true
+   }
 },{timestamps:true})
 
 export const Applicant = new mongoose.model("Applicant",ApplicantSchema)

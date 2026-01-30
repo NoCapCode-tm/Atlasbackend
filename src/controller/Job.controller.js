@@ -98,6 +98,7 @@ export const applyForJob = asynchandler(async (req, res) => {
       dob,
       gender,
       other,
+      jobtitle:job.title
     });
 
     job.applicants.push(applicant._id);
