@@ -55,7 +55,6 @@ export const createJob =asynchandler(async (req, res) => {
 });
 
 export const applyForJob = asynchandler(async (req, res) => {
-  try {
     const {
       name,
       email,
@@ -106,9 +105,6 @@ export const applyForJob = asynchandler(async (req, res) => {
 
     res.status(201)
     .json(new Apiresponse(200,"Applicant applied Successfully"));
-  } catch (error) {
-    console.log("Something Went Wrong",error)
-  }
 });
 
 
