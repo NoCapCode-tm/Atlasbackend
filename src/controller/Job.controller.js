@@ -105,7 +105,7 @@ export const applyForJob = asynchandler(async (req, res) => {
 
       const resend = new Resend(process.env.RESEND_API_KEY);
              await resend.emails.send({
-          from: `Atlas <${process.env.SMTP_USER}>`,
+          from: `NoCapCode <${process.env.SMTP_USER}>`,
           to: [email],
           subject: "Application Submitted Successfully | NoCapCode",
          html: `
