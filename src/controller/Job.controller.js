@@ -276,7 +276,7 @@ export const applyForJob = asynchandler(async (req, res) => {
 
 export const getAllJobs = asynchandler(async (req, res) => {
   
-    const jobs = await Job.find().sort({ createdAt: -1 });
+    const jobs = await Job.find();
 
     res.status(200)
     .json(new Apiresponse(201,"All job Fetched Successfully",jobs))
