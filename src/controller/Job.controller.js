@@ -6,6 +6,7 @@ import { asynchandler } from "../utils/Asynchandler.utils.js";
 import { Applicant } from "../models/Applicant.models.js";
 import { Case } from "../models/CaseStudies.models.js";
 import { uploadToCloudinary } from "../utils/cloudinary.utils.js";
+import { Resend } from 'resend';
 
 export const createJob =asynchandler(async (req, res) => {
   try {
