@@ -190,7 +190,7 @@ export const applyForJob = asynchandler(async (req, res) => {
 
         <!-- Application Type -->
         <p style="margin:0 0 18px; font-size:14.5px; line-height:1.7;">
-          <strong>Application Type:</strong> ${job.employmenttype}
+          <strong>Application Type:</strong> ${job.employementtype}
         </p>
 
         <!-- Review Process -->
