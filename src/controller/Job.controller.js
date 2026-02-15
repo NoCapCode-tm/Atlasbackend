@@ -355,3 +355,609 @@ export const adminlogin = asynchandler(async(req,res)=>{
   }
   
 })
+
+export const contactus = asynchandler(async(req,res)=>{
+  const{name,email,message}=req.body
+
+  if(!name || !email ||!message){
+    throw new Apierror(400,"Please fill all the required fields")
+  }
+
+   const resend = new Resend(process.env.RESEND_API_KEY);
+             await resend.emails.send({
+          from: `NoCapCode <${process.env.SMTP_USER}>`,
+          to: [email],
+          subject: "Application Submitted Successfully | NoCapCode",
+          html:`
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>We've Received Your Message</title>
+</head>
+
+<body style="
+  margin:0;
+  padding:0;
+  background:#F4F6F8;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td align="center" style="padding:48px 16px;">
+
+  <!-- Container -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="
+    max-width:640px;
+    background:#FFFFFF;
+    border-radius:12px;
+    box-shadow:0 12px 32px rgba(0,0,0,0.08);
+    overflow:hidden;
+  ">
+
+    <!-- Header -->
+    <tr>
+      <td style="
+        padding:32px;
+        background:#0F1115;
+        text-align:center;
+      ">
+        <img
+          src="https://nocapcode.cloud/Companylogo.png"
+          alt="NoCapCode"
+          width="125"
+          style="display:block; margin:0 auto 12px;"
+        />
+
+        <h1 style="
+          margin:0;
+          font-size:20px;
+          font-weight:600;
+          color:#FFFFFF;
+          letter-spacing:0.3px;
+        ">
+          We've Received Your Message
+        </h1>
+
+        <p style="
+          margin:8px 0 0;
+          font-size:12px;
+          color:#B6BBC7;
+        ">
+          NoCapCode™ · Building with Clarity
+        </p>
+      </td>
+    </tr>
+
+    <!-- Content -->
+    <tr>
+      <td style="padding:36px; color:#1F2937;">
+
+        <!-- Greeting -->
+        <p style="margin:0 0 18px; font-size:14.5px;">
+          Hey <strong>${name ? name.split(" ")[0] : "there"}</strong>,
+        </p>
+
+        <!-- Confirmation -->
+        <p style="margin:0 0 18px; font-size:14.5px; line-height:1.7;">
+          Thanks for reaching out to <strong>NoCapCode</strong>. 
+          We’ve successfully received your message and our team is reviewing it.
+        </p>
+
+        <!-- Message Summary Box -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="
+          background:#F9FAFB;
+          border-radius:10px;
+          padding:20px;
+          border:1px solid #E5E7EB;
+        ">
+          <tr>
+            <td>
+              <p style="margin:0 0 10px; font-size:13px; font-weight:600;">
+                Here’s what you submitted:
+              </p>
+              <p style="margin:0; font-size:13.5px; line-height:1.7; color:#374151;">
+                "${message}"
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Response Expectation -->
+        <p style="margin:22px 0 0; font-size:14px; line-height:1.7;">
+          Our team typically responds within <strong>24-48 hours</strong>. 
+          If your request is urgent, feel free to email us directly at 
+          <a href="mailto:hello@nocapcode.cloud" style="color:#4F46E5; text-decoration:none;">
+            hello@nocapcode.cloud
+          </a>.
+        </p>
+
+        <!-- Closing -->
+        <p style="margin:18px 0 0; font-size:14px;">
+          Appreciate you connecting with us.<br/>
+          <strong>NoCapCode Team</strong>
+        </p>
+
+      </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+      <td style="
+        padding:24px 32px;
+        background:#F9FAFB;
+        border-top:1px solid #E5E7EB;
+        text-align:center;
+      ">
+        <p style="margin:0; font-size:11.5px; color:#6B7280; line-height:1.6;">
+          This is an automated confirmation email.
+          <br/>
+          We’ll personally respond to your inquiry shortly.
+          <br/><br/>
+          <strong>NoCapCode™</strong> 
+          <br>402 N Guadalupe St, Santa Fe, NM 87501, United States
+        </p>
+      </td>
+    </tr>
+
+  </table>
+
+  <p style="margin-top:22px; font-size:11px; color:#9CA3AF; text-align:center;">
+    © 2026 NoCapCode™. All rights reserved.
+  </p>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+          `
+        });
+
+ const resend1 = new Resend(process.env.RESEND_API_KEY);
+             await resend1.emails.send({
+          from: `NoCapCode <${process.env.SMTP_USER}>`,
+          to:  [process.env.SMTP_USER],
+          subject: "Contact Us - Notification | NoCapCode",
+          html:`
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Notification | NoCapCode</title>
+</head>
+
+<body style="
+  margin:0;
+  padding:0;
+  background:#F4F6F8;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td align="center" style="padding:40px 16px;">
+
+  <!-- Container -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="
+    max-width:680px;
+    background:#FFFFFF;
+    border-radius:12px;
+    box-shadow:0 12px 32px rgba(0,0,0,0.08);
+    overflow:hidden;
+  ">
+
+    <!-- Header -->
+    <tr>
+      <td style="
+        padding:28px 32px;
+        background:#0F1115;
+      ">
+        <h2 style="
+          margin:0;
+          color:#FFFFFF;
+          font-size:18px;
+          font-weight:600;
+        ">
+          New Contact Form Submission
+        </h2>
+
+        <p style="
+          margin:6px 0 0;
+          color:#B6BBC7;
+          font-size:12px;
+        ">
+          NoCapCode™ Website
+        </p>
+      </td>
+    </tr>
+
+    <!-- Body -->
+    <tr>
+      <td style="padding:32px; color:#1F2937;">
+
+        <p style="margin:0 0 20px; font-size:14px;">
+          A new message has been submitted through the <strong>Contact Us</strong> page.
+        </p>
+
+        <!-- Info Table -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="
+          border-collapse:collapse;
+          font-size:14px;
+        ">
+          <tr>
+            <td style="padding:12px; border:1px solid #E5E7EB; background:#F9FAFB; width:150px;">
+              <strong>Name</strong>
+            </td>
+            <td style="padding:12px; border:1px solid #E5E7EB;">
+              ${name}
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:12px; border:1px solid #E5E7EB; background:#F9FAFB;">
+              <strong>Email</strong>
+            </td>
+            <td style="padding:12px; border:1px solid #E5E7EB;">
+              <a href="mailto:${email}" style="color:#4F46E5; text-decoration:none;">
+                ${email}
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:12px; border:1px solid #E5E7EB; background:#F9FAFB; vertical-align:top;">
+              <strong>Message</strong>
+            </td>
+            <td style="padding:12px; border:1px solid #E5E7EB; line-height:1.6;">
+              ${message}
+            </td>
+          </tr>
+        </table>
+
+        <!-- Action Reminder -->
+        <p style="margin:24px 0 0; font-size:13px; color:#6B7280;">
+          Please respond to the inquiry within 24 hours to maintain a strong client experience.
+        </p>
+
+      </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+      <td style="
+        padding:20px 32px;
+        background:#F9FAFB;
+        border-top:1px solid #E5E7EB;
+        text-align:center;
+      ">
+        <p style="margin:0; font-size:11.5px; color:#9CA3AF;">
+          This is an automated notification from NoCapCode™ website.
+        </p>
+      </td>
+    </tr>
+
+  </table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+          `
+        });
+
+
+res.status(200)
+.json(new Apiresponse(201,"Contact us completed"))
+
+
+})
+
+// export const clarity = asynchandler(async(req,res)=>{
+//   const{name,email,message}=req.body
+
+//   if(!name || !email ||!message){
+//     throw new Apierror(400,"Please fill all the required fields")
+//   }
+
+//    const resend = new Resend(process.env.RESEND_API_KEY);
+//              await resend.emails.send({
+//           from: `NoCapCode <${process.env.SMTP_USER}>`,
+//           to: [email],
+//           subject: "Application Submitted Successfully | NoCapCode",
+//           html:`
+//           <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="UTF-8" />
+//   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+//   <title>We've Received Your Message</title>
+// </head>
+
+// <body style="
+//   margin:0;
+//   padding:0;
+//   background:#F4F6F8;
+//   font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+// ">
+
+// <table width="100%" cellpadding="0" cellspacing="0">
+// <tr>
+// <td align="center" style="padding:48px 16px;">
+
+//   <!-- Container -->
+//   <table width="100%" cellpadding="0" cellspacing="0" style="
+//     max-width:640px;
+//     background:#FFFFFF;
+//     border-radius:12px;
+//     box-shadow:0 12px 32px rgba(0,0,0,0.08);
+//     overflow:hidden;
+//   ">
+
+//     <!-- Header -->
+//     <tr>
+//       <td style="
+//         padding:32px;
+//         background:#0F1115;
+//         text-align:center;
+//       ">
+//         <img
+//           src="https://nocapcode.cloud/Companylogo.png"
+//           alt="NoCapCode"
+//           width="125"
+//           style="display:block; margin:0 auto 12px;"
+//         />
+
+//         <h1 style="
+//           margin:0;
+//           font-size:20px;
+//           font-weight:600;
+//           color:#FFFFFF;
+//           letter-spacing:0.3px;
+//         ">
+//           We've Received Your Message
+//         </h1>
+
+//         <p style="
+//           margin:8px 0 0;
+//           font-size:12px;
+//           color:#B6BBC7;
+//         ">
+//           NoCapCode™ · Building with Clarity
+//         </p>
+//       </td>
+//     </tr>
+
+//     <!-- Content -->
+//     <tr>
+//       <td style="padding:36px; color:#1F2937;">
+
+//         <!-- Greeting -->
+//         <p style="margin:0 0 18px; font-size:14.5px;">
+//           Hey <strong>${name ? name.split(" ")[0] : "there"}</strong>,
+//         </p>
+
+//         <!-- Confirmation -->
+//         <p style="margin:0 0 18px; font-size:14.5px; line-height:1.7;">
+//           Thanks for reaching out to <strong>NoCapCode</strong>. 
+//           We’ve successfully received your message and our team is reviewing it.
+//         </p>
+
+//         <!-- Message Summary Box -->
+//         <table width="100%" cellpadding="0" cellspacing="0" style="
+//           background:#F9FAFB;
+//           border-radius:10px;
+//           padding:20px;
+//           border:1px solid #E5E7EB;
+//         ">
+//           <tr>
+//             <td>
+//               <p style="margin:0 0 10px; font-size:13px; font-weight:600;">
+//                 Here’s what you submitted:
+//               </p>
+//               <p style="margin:0; font-size:13.5px; line-height:1.7; color:#374151;">
+//                 "${message}"
+//               </p>
+//             </td>
+//           </tr>
+//         </table>
+
+//         <!-- Response Expectation -->
+//         <p style="margin:22px 0 0; font-size:14px; line-height:1.7;">
+//           Our team typically responds within <strong>24-48 hours</strong>. 
+//           If your request is urgent, feel free to email us directly at 
+//           <a href="mailto:hello@nocapcode.cloud" style="color:#4F46E5; text-decoration:none;">
+//             hello@nocapcode.cloud
+//           </a>.
+//         </p>
+
+//         <!-- Closing -->
+//         <p style="margin:18px 0 0; font-size:14px;">
+//           Appreciate you connecting with us.<br/>
+//           <strong>NoCapCode Team</strong>
+//         </p>
+
+//       </td>
+//     </tr>
+
+//     <!-- Footer -->
+//     <tr>
+//       <td style="
+//         padding:24px 32px;
+//         background:#F9FAFB;
+//         border-top:1px solid #E5E7EB;
+//         text-align:center;
+//       ">
+//         <p style="margin:0; font-size:11.5px; color:#6B7280; line-height:1.6;">
+//           This is an automated confirmation email.
+//           <br/>
+//           We’ll personally respond to your inquiry shortly.
+//           <br/><br/>
+//           <strong>NoCapCode™</strong> 
+//           <br>402 N Guadalupe St, Santa Fe, NM 87501, United States
+//         </p>
+//       </td>
+//     </tr>
+
+//   </table>
+
+//   <p style="margin-top:22px; font-size:11px; color:#9CA3AF; text-align:center;">
+//     © 2026 NoCapCode™. All rights reserved.
+//   </p>
+
+// </td>
+// </tr>
+// </table>
+
+// </body>
+// </html>
+//           `
+//         });
+
+//  const resend1 = new Resend(process.env.RESEND_API_KEY);
+//              await resend1.emails.send({
+//           from: `NoCapCode <${process.env.SMTP_USER}>`,
+//           to:  [process.env.SMTP_USER],
+//           subject: "Contact Us - Notification | NoCapCode",
+//           html:`
+//           <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="UTF-8" />
+//   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+//   <title>Contact Us - Notification | NoCapCode</title>
+// </head>
+
+// <body style="
+//   margin:0;
+//   padding:0;
+//   background:#F4F6F8;
+//   font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+// ">
+
+// <table width="100%" cellpadding="0" cellspacing="0">
+// <tr>
+// <td align="center" style="padding:40px 16px;">
+
+//   <!-- Container -->
+//   <table width="100%" cellpadding="0" cellspacing="0" style="
+//     max-width:680px;
+//     background:#FFFFFF;
+//     border-radius:12px;
+//     box-shadow:0 12px 32px rgba(0,0,0,0.08);
+//     overflow:hidden;
+//   ">
+
+//     <!-- Header -->
+//     <tr>
+//       <td style="
+//         padding:28px 32px;
+//         background:#0F1115;
+//       ">
+//         <h2 style="
+//           margin:0;
+//           color:#FFFFFF;
+//           font-size:18px;
+//           font-weight:600;
+//         ">
+//           New Contact Form Submission
+//         </h2>
+
+//         <p style="
+//           margin:6px 0 0;
+//           color:#B6BBC7;
+//           font-size:12px;
+//         ">
+//           NoCapCode™ Website
+//         </p>
+//       </td>
+//     </tr>
+
+//     <!-- Body -->
+//     <tr>
+//       <td style="padding:32px; color:#1F2937;">
+
+//         <p style="margin:0 0 20px; font-size:14px;">
+//           A new message has been submitted through the <strong>Contact Us</strong> page.
+//         </p>
+
+//         <!-- Info Table -->
+//         <table width="100%" cellpadding="0" cellspacing="0" style="
+//           border-collapse:collapse;
+//           font-size:14px;
+//         ">
+//           <tr>
+//             <td style="padding:12px; border:1px solid #E5E7EB; background:#F9FAFB; width:150px;">
+//               <strong>Name</strong>
+//             </td>
+//             <td style="padding:12px; border:1px solid #E5E7EB;">
+//               ${name}
+//             </td>
+//           </tr>
+
+//           <tr>
+//             <td style="padding:12px; border:1px solid #E5E7EB; background:#F9FAFB;">
+//               <strong>Email</strong>
+//             </td>
+//             <td style="padding:12px; border:1px solid #E5E7EB;">
+//               <a href="mailto:${email}" style="color:#4F46E5; text-decoration:none;">
+//                 ${email}
+//               </a>
+//             </td>
+//           </tr>
+
+//           <tr>
+//             <td style="padding:12px; border:1px solid #E5E7EB; background:#F9FAFB; vertical-align:top;">
+//               <strong>Message</strong>
+//             </td>
+//             <td style="padding:12px; border:1px solid #E5E7EB; line-height:1.6;">
+//               ${message}
+//             </td>
+//           </tr>
+//         </table>
+
+//         <!-- Action Reminder -->
+//         <p style="margin:24px 0 0; font-size:13px; color:#6B7280;">
+//           Please respond to the inquiry within 24 hours to maintain a strong client experience.
+//         </p>
+
+//       </td>
+//     </tr>
+
+//     <!-- Footer -->
+//     <tr>
+//       <td style="
+//         padding:20px 32px;
+//         background:#F9FAFB;
+//         border-top:1px solid #E5E7EB;
+//         text-align:center;
+//       ">
+//         <p style="margin:0; font-size:11.5px; color:#9CA3AF;">
+//           This is an automated notification from NoCapCode™ website.
+//         </p>
+//       </td>
+//     </tr>
+
+//   </table>
+
+// </td>
+// </tr>
+// </table>
+
+// </body>
+// </html>
+//           `
+//         });
+
+
+// res.status(200)
+// .json(new Apiresponse(201,"Contact us completed"))
+
+
+// })

@@ -8,6 +8,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
   "https://nocapcode.cloud",
+  "https://atlas.nocapcode.cloud",
 ];
 
 app.use(

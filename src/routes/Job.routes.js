@@ -1,5 +1,5 @@
 import {Router} from "express"
-import { addcasestudy, adminlogin, applyForJob, createJob, getAllJobs, getcasestudy, getJobApplicants } from "../controller/Job.controller.js"
+import { addcasestudy, adminlogin, applyForJob, contactus, createJob, getAllJobs, getcasestudy, getJobApplicants } from "../controller/Job.controller.js"
 import { upload } from "../middleware/multer.middleware.js"
 
 
@@ -14,6 +14,7 @@ jobrouter.route("/addcasestudy").post(upload.fields([
     { name: "thumbnail", maxCount: 1 },]),
     addcasestudy
 )
+jobrouter.route("/contactus").post(contactus)
 
 
 //get apis
