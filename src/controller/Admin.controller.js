@@ -16,6 +16,7 @@ import { PerformanceScore } from "../models/PerformanceScore.models.js"
 import { ReportExport } from "../models/ReportExport.models.js"
 import { generateExcel, generatePDF } from "../utils/reportExporter.js"
 import { Resend } from 'resend';
+import { User } from "../../../NoCapCode backend/src/models/Employee.models.js"
 const generateTeamID = () => {
   const random = Math.floor(100 + Math.random() * 900);
   return `P00${random}`;
@@ -285,6 +286,13 @@ const addemployee = asynchandler(async(req,res)=>{
         
         
         const user = await User.create({
+          empid,
+          name,
+          email,
+          password,
+          status:"Onboarding",
+        })
+        const user1 = await User.create({
           empid,
           name,
           email,
