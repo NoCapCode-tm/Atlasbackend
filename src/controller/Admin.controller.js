@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { User } from "../models/Employee.models.js"
+import { User , Employee} from "../models/Employee.models.js"
 import nodemailer from "nodemailer"
 import { Project } from "../models/Project.models.js"
 import { asynchandler } from "../utils/Asynchandler.utils.js"
@@ -16,7 +16,6 @@ import { PerformanceScore } from "../models/PerformanceScore.models.js"
 import { ReportExport } from "../models/ReportExport.models.js"
 import { generateExcel, generatePDF } from "../utils/reportExporter.js"
 import { Resend } from 'resend';
-import { Employee} from "../../../NoCapCode backend/src/models/Employee.models.js"
 const generateTeamID = () => {
   const random = Math.floor(100 + Math.random() * 900);
   return `P00${random}`;
