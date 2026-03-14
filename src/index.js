@@ -9,14 +9,14 @@ dotenv.config({
 
 
 const PORT = process.env.PORT || 5000
-// connectdb()
-// .then(()=>{
-//     app.listen(PORT ,()=>{
-//       console.log(`App is listening on PORT ${PORT}`)
-//     })
-// }).catch((error)=>{
-//     console.log("Something Went Wrong",error.message)
-// })
+atlasConnection()
+.then(()=>{
+    app.listen(PORT ,()=>{
+      console.log(`App is listening on PORT ${PORT}`)
+    })
+}).catch((error)=>{
+    console.log("Something Went Wrong",error.message)
+})
 
 import "./cron/Metrics.cron.js";   // <--- Load cron
 import "./cron/inactiveUserCron.js"
@@ -24,3 +24,4 @@ import "./cron/slaCron.js"
 import "./cron/performanceScoreCron.js"
 import "./cron/missedReportCron.js"
 import "./cron/ActivityremoveCron.js"
+import { atlasConnection } from "./database/dbconnect.js"
