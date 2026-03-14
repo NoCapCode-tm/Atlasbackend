@@ -322,6 +322,14 @@ recentActivity:[{
         default:""
     }
 }],
+completioncertificate:{
+    type:String,
+    default:null
+},
+acknowledge:{
+    type:String,
+    default:"",
+},
 
 deleted:{
   type:Boolean,

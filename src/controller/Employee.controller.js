@@ -784,7 +784,6 @@ const getsubtask =asynchandler(async(req,res)=>{
 const onboardingdetails = async (req, res) => {
   const userId = req.user._id;
   const step = Number(req.params.step);
-  console.log(userId)
 
   const user = await User.findById(userId);
   if (!user){

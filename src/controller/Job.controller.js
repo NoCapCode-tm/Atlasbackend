@@ -7,6 +7,7 @@ import { Applicant } from "../models/Applicant.models.js";
 import { Case } from "../models/CaseStudies.models.js";
 import { uploadToCloudinary } from "../utils/cloudinary.utils.js";
 import { Resend } from 'resend';
+import { User } from "../models/Employee.models.js";
 
 export const createJob =asynchandler(async (req, res) => {
   try {
@@ -951,4 +952,256 @@ res.status(200)
 .json(new Apiresponse(201,"Clarity Form completed"))
 
 
+})
+
+export const credentialverify = asynchandler(async(req,res)=>{
+  const{credid, content} = req.body
+
+  if(!credid){
+    throw new Apierror(400,"Please fill all the required fields")
+  }
+
+  const employee = await User.findById(credid)
+
+  if(!employee){
+    throw new Apierror(400,"Employee not found")
+  }
+
+  let certificate = ""
+
+  if (req.files?.certificate?.length > 0){
+    const upload = await uploadToCloudinary(
+              req.files.certificate[0].buffer,
+              `${employee.name}/certificate`
+            );
+      certificate = upload.secure_url
+  }
+
+
+    employee.completioncertificate = certificate
+    employee.endAt = Date.now()
+    employee.acknowledge = content
+    await employee.save({validateBeforeSave:false})
+  
+
+ const start = new Date(employee.startedAt);
+const end = new Date(employee.endAt);
+
+const duration =
+  (end.getFullYear() - start.getFullYear()) * 12 +
+  (end.getMonth() - start.getMonth());
+
+  const resend2 = new Resend(process.env.RESEND_API_KEY);
+             await resend2.emails.send({
+          from: `NoCapCode <${process.env.SMTP_USER}>`,
+          to: [employee.email],
+          subject: "Application Submitted Successfully | NoCapCode",
+          html:`
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Internship Completion Certificate | NoCapCode</title>
+</head>
+
+<body style="
+  margin:0;
+  padding:0;
+  background:#F4F6F8;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td align="center" style="padding:40px 16px;">
+
+  <!-- Main Container -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="
+    max-width:720px;
+    background:#FFFFFF;
+    border-radius:12px;
+    box-shadow:0 12px 32px rgba(0,0,0,0.08);
+    overflow:hidden;
+  ">
+
+    <!-- Header -->
+    <tr>
+      <td style="
+        padding:40px 32px;
+        background:#0F1115;
+        text-align:center;
+      ">
+        
+        <img
+          src="https://nocapcode.cloud/Companylogo.png"
+          alt="NoCapCode"
+          width="140"
+          style="display:block; margin:0 auto 18px;"
+        />
+
+        <h2 style="
+          margin:0;
+          color:#FFFFFF;
+          font-size:22px;
+          font-weight:600;
+          letter-spacing:0.4px;
+        ">
+          Internship Completion Certificate
+        </h2>
+
+        <p style="
+          margin:10px 0 0;
+          color:#B6BBC7;
+          font-size:12px;
+          letter-spacing:0.5px;
+        ">
+          NoCapCode™ · Build with Clarity
+        </p>
+
+      </td>
+    </tr>
+
+    <!-- Body -->
+    <tr>
+      <td style="padding:36px 32px; color:#1F2937;">
+
+        <p style="margin:0 0 18px; font-size:15px;">
+          Dear <strong>${employee.name}</strong>,
+        </p>
+
+        <p style="margin:0 0 16px; font-size:14px; line-height:1.7;">
+          We are pleased to formally recognize the successful completion of your internship as 
+          <strong>${employee.role}</strong> at <strong>NoCapCode™</strong> for the duration of 
+          <strong>${duration} months</strong>.
+        </p>
+
+        <p style="margin:0 0 16px; font-size:14px; line-height:1.7;">
+          Throughout your time with us, you demonstrated professionalism, ownership, and a strong 
+          willingness to learn. Your contributions consistently reflected clarity in execution, 
+          accountability in responsibilities, and a meaningful commitment to team success.
+        </p>
+
+        <p style="margin:0 0 24px; font-size:14px; line-height:1.7;">
+          We sincerely appreciate the dedication and positive energy you brought into the organization. 
+          It has been a pleasure having you as part of our team, and we trust that this experience 
+          has added meaningful value to your professional journey.
+        </p>
+
+        <!-- Certificate Preview -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0;">
+          <tr>
+            <td align="center">
+              <img
+                src=${employee.completioncertificate}
+                alt="Internship Certificate Preview"
+                width="420"
+                style="max-width:100%; border-radius:8px; border:1px solid #E5E7EB;"
+              />
+            </td>
+          </tr>
+        </table>
+
+        <!-- CTA Button -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin:28px 0 10px;">
+          <tr>
+            <td align="center">
+              <a href="https://nocapcode.cloud/#/verify/certificate/${employee._id}" 
+                 style="
+                   display:inline-block;
+                   padding:14px 28px;
+                   background:#4F46E5;
+                   color:#FFFFFF;
+                   font-size:14px;
+                   font-weight:600;
+                   text-decoration:none;
+                   border-radius:8px;
+                   letter-spacing:0.3px;
+                 ">
+                 Access & Download Your Official Certificate
+              </a>
+            </td>
+          </tr>
+        </table>
+
+        <p style="margin:18px 0 0; font-size:13px; color:#6B7280; line-height:1.6;">
+          Your certificate is securely verifiable through our official verification portal. 
+          We encourage you to share it proudly across your professional platforms.
+        </p>
+
+        <p style="margin:24px 0 0; font-size:14px;">
+          Wishing you continued success in your future endeavors.
+        </p>
+
+        <p style="margin:16px 0 0; font-size:14px;">
+          Warm regards,<br/>
+          <strong>Talent Acquisition & HR Team</strong><br/>
+          NoCapCode™
+        </p>
+
+      </td>
+    </tr>
+
+    <!-- Enhanced Footer -->
+    <tr>
+      <td style="
+        padding:26px 32px;
+        background:#F9FAFB;
+        border-top:1px solid #E5E7EB;
+        text-align:center;
+      ">
+        <p style="margin:0 0 6px; font-size:12px; color:#6B7280;">
+          This communication was issued by NoCapCode™ Talent Acquisition & Human Resources.
+        </p>
+
+        <p style="margin:0 0 6px; font-size:12px; color:#6B7280;">
+          Certificate Verification Portal:
+          <a href="https://nocapcode.cloud/#/verify/certificate/${employee._id}" 
+             style="color:#4F46E5; text-decoration:none;">
+             nocapcode.cloud/#/verify/certificate/${employee._id}
+          </a>
+        </p>
+
+        <p style="margin:10px 0 0; font-size:11px; color:#9CA3AF;">
+          ©2025-26 NoCapCode™. All rights reserved.<br/>
+          Build with Clarity.
+        </p>
+      </td>
+    </tr>
+
+  </table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+          `
+        });
+
+  res.status(200)
+  .json(new Apiresponse(200,"Certificate saved successfully"))
+
+
+
+})
+
+export const verify = asynchandler(async(req,res)=>{
+  const {credid} = req.params
+
+  if(!credid){
+    throw new Apierror(400,"Please fill all the required fields")
+  }
+
+ const employee =  await User.findById(credid)
+
+  if(!employee){
+    throw new Apierror(400,"Employee not found")
+  }
+
+  res.status(200)
+  .json(new Apiresponse(200,"Details fetched Successfully",employee))
+  
+  
 })

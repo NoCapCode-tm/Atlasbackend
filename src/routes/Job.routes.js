@@ -1,5 +1,5 @@
 import {Router} from "express"
-import { addcasestudy, adminlogin, applyForJob, clarity, contactus, createJob, getAllJobs, getcasestudy, getJobApplicants } from "../controller/Job.controller.js"
+import { addcasestudy, adminlogin, applyForJob, clarity, contactus, createJob, credentialverify, getAllJobs, getcasestudy, getJobApplicants, verify } from "../controller/Job.controller.js"
 import { upload } from "../middleware/multer.middleware.js"
 
 
@@ -14,12 +14,17 @@ jobrouter.route("/addcasestudy").post(upload.fields([
     { name: "thumbnail", maxCount: 1 },]),
     addcasestudy
 )
+jobrouter.route("/addcertificate").post(upload.fields([
+    { name: "certificate", maxCount: 1 },]),
+    credentialverify
+)
 jobrouter.route("/contactus").post(contactus)
 jobrouter.route("/clarity").post(clarity)
 
 
 //get apis
 jobrouter.route("/getjobs").get(getAllJobs)
+jobrouter.route("/getcertificate/:credid").get(verify)
 jobrouter.route("/getapplicants").get(getJobApplicants)
 jobrouter.route("/getallcasestudy").get(getcasestudy)
 
