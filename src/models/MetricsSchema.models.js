@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { atlasConnection } from "../database/dbconnect";
 
 const MetricsSchema = mongoose.Schema({
      date: {
@@ -28,7 +29,7 @@ const MetricsSchema = mongoose.Schema({
   }
 },{timestamps:true})
 
-export const Metrics = new mongoose.model("Metrics",MetricsSchema)
+export const Metrics = new atlasConnection.model("Metrics",MetricsSchema)
 
 const RedFlagSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -52,7 +53,7 @@ const RedFlagSchema = new mongoose.Schema({
   date: Date,
 });
 
-export const RedFlag = mongoose.model("RedFlag", RedFlagSchema);
+export const RedFlag = atlasConnection.model("RedFlag", RedFlagSchema);
 
 const SLASchema = new mongoose.Schema({
   date: Date,
@@ -61,5 +62,5 @@ const SLASchema = new mongoose.Schema({
   slaPercentage: Number,
   type:String
 });
-export const SLA = mongoose.model("SLA", SLASchema);
+export const SLA = atlasConnection.model("SLA", SLASchema);
 

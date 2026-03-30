@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { atlasConnection } from "../database/dbconnect"
 
 const SubtaskSchema = mongoose.Schema({
     relatedtasks:{
@@ -23,4 +24,4 @@ const SubtaskSchema = mongoose.Schema({
     }
 },{timestamps:true})
 
-export const Subtask = new mongoose.model("Subtask",SubtaskSchema)
+export const Subtask = new atlasConnection.model("Subtask",SubtaskSchema)

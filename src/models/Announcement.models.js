@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
+import { atlasConnection } from "../database/dbconnect"
 
-const AnnouncementSchema = mongoose.Schema({
+const AnnouncementSchema = new mongoose.Schema({
     type:{
         type:String,
         enum:["General Announcement","Warning/Inquiry","Motivational"]
@@ -76,4 +77,4 @@ acknowledged:[{
 
 },{timestamps:true})
 
-export const Announcement = new mongoose.model("Announcement",AnnouncementSchema)
+export const Announcement = atlasConnection.model("Announcement",AnnouncementSchema)

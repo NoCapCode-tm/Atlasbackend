@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { atlasConnection } from "../database/dbconnect";
 
 const ReviewSchema = new mongoose.Schema({
   user: {
@@ -39,4 +40,4 @@ const ReviewSchema = new mongoose.Schema({
   },
 });
 
-export const Review = mongoose.model("Review", ReviewSchema);
+export const Review = atlasConnection.model("Review", ReviewSchema);

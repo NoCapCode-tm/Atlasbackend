@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { atlasConnection } from "../database/dbconnect"
 
 const TaskSchema = mongoose.Schema({
     projectId:{
@@ -95,4 +96,4 @@ const TaskSchema = mongoose.Schema({
     }]
 },{timestamps:true})
 
-export const Task = new mongoose.model("Task",TaskSchema)
+export const Task = new atlasConnection.model("Task",TaskSchema)

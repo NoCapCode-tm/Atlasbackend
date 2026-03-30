@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { atlasConnection } from "../database/dbconnect"
 
 const TicketSchema = mongoose.Schema({
    status:{
@@ -64,4 +65,4 @@ const TicketSchema = mongoose.Schema({
    }]
 },{timestamps:true})
 
-export const Token = new mongoose.model("Token",TicketSchema)
+export const Token = new atlasConnection.model("Token",TicketSchema)

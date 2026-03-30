@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { atlasConnection } from "../database/dbconnect"
 
 const CaseSchema = mongoose.Schema({
     title:{
@@ -19,4 +20,4 @@ const CaseSchema = mongoose.Schema({
     }
 },{timestamps:true})
 
-export const Case = new mongoose.model("Case",CaseSchema)
+export const Case = new atlasConnection.model("Case",CaseSchema)
