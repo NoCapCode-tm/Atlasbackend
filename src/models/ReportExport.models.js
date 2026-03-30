@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { atlasConnection } from "../database/dbconnect";
+import { atlasConnection } from "../database/dbconnect.js";
 
 const reportExportSchema = new mongoose.Schema(
   {

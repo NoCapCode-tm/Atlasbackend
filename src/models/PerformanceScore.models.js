@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { atlasConnection } from "../database/dbconnect"
+import { atlasConnection } from "../database/dbconnect.js"
 
 const ScoreSchema = mongoose.Schema({
     userId: { 
@@ -54,4 +54,4 @@ date:{
 }
 },{timestamps:true})
 
-export const PerformanceScore = new atlasConnection.model("PerformanceScore",ScoreSchema)
+export const PerformanceScore =  atlasConnection.model("PerformanceScore",ScoreSchema)

@@ -143,4 +143,4 @@ const ProjectSchema = new mongoose.Schema({
 //   next();
 // });
 
-export const Project  = new atlasConnection.model("Project",ProjectSchema)
+export const Project  =  atlasConnection.model("Project",ProjectSchema)
