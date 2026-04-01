@@ -1120,11 +1120,12 @@ const allprojects = asynchandler(async(req,res)=>{
 
 const allemployees = asynchandler(async(req,res)=>{
   const employees = await User.find();
-  if(!employees){
+  const active  = employees.filter(e=> e.deleted === false)
+  if(!active){
     throw new Apierror(400,"User not found")
   }
   res.status(200)
-  .json(new Apiresponse(200,"User Fetched Successfully",employees))
+  .json(new Apiresponse(200,"User Fetched Successfully",active))
 })
 
 const redflags = asynchandler(async(req,res)=>{
