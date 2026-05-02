@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { User , Employee} from "../models/Employee.models.js"
+import { User } from "../models/Employee.models.js"
 import nodemailer from "nodemailer"
 import { Project } from "../models/Project.models.js"
 import { asynchandler } from "../utils/Asynchandler.utils.js"
@@ -285,13 +285,6 @@ const addemployee = asynchandler(async(req,res)=>{
         
         
         const user = await User.create({
-          empid,
-          name,
-          email,
-          password,
-          status:"Onboarding",
-        })
-        const user1 = await Employee.create({
           empid,
           name,
           email,

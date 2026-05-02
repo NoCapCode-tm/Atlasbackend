@@ -1,6 +1,4 @@
 import mongoose from "mongoose" 
-import { atlasConnection } from "../database/dbconnect.js"
-
 const JobSchema = mongoose.Schema({
     title:{
         type:String,
@@ -44,4 +42,4 @@ const JobSchema = mongoose.Schema({
     }]
 },{timestamps:true})
 
-export const Job =  atlasConnection.model("Job",JobSchema)
+export const Job =  mongoose.model("Job",JobSchema)

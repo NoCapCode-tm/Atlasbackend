@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { atlasConnection } from "../database/dbconnect.js"
+
 
 const ReportSchema = mongoose.Schema({
     user:{
@@ -43,4 +43,4 @@ const ReportSchema = mongoose.Schema({
     }
 },{timestamps:true})
 
-export const Report = atlasConnection.model("Report",ReportSchema)
+export const Report = mongoose.model("Report",ReportSchema)

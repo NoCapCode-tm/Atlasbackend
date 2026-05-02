@@ -781,149 +781,149 @@ const getsubtask =asynchandler(async(req,res)=>{
   .json(new Apiresponse(201,"Subtask fetched successfully",subtask))
 })
 
-const onboardingdetails = async (req, res) => {
-  const userId = req.user._id;
-  const step = Number(req.params.step);
+// const onboardingdetails = async (req, res) => {
+//   const userId = req.user._id;
+//   const step = Number(req.params.step);
 
-  const user = await User.findById(userId);
-  if (!user){
-    throw new Apierror(404, "User not found");
-  }
+//   const user = await User.findById(userId);
+//   if (!user){
+//     throw new Apierror(404, "User not found");
+//   }
 
-  if (!user.onboarding.startedAt) {
-    user.onboarding.startedAt = new Date();
-    user.onboarding.status = "In Progress";
-  }
+//   if (!user.onboarding.startedAt) {
+//     user.onboarding.startedAt = new Date();
+//     user.onboarding.status = "In Progress";
+//   }
 
-  switch (step) {
-    case 1: {
-      const {
-        phone, dob, gender,
-        permanentaddress, communicationaddress,
-        emergencynumber, emergencyname
-      } = req.body;
+//   switch (step) {
+//     case 1: {
+//       const {
+//         phone, dob, gender,
+//         permanentaddress, communicationaddress,
+//         emergencynumber, emergencyname
+//       } = req.body;
 
-      user.phone = phone;
-      user.dob = dob;
-      user.gender = gender;
-      user.address.permanent = permanentaddress;
-      user.address.communication = communicationaddress;
-      user.emergency.contactnumber = emergencynumber;
-      user.emergency.contactname = emergencyname;
-      break;
-    }
-    case 2: {
-      const { aadharno, panno, studentid } = req.body;
+//       user.phone = phone;
+//       user.dob = dob;
+//       user.gender = gender;
+//       user.address.permanent = permanentaddress;
+//       user.address.communication = communicationaddress;
+//       user.emergency.contactnumber = emergencynumber;
+//       user.emergency.contactname = emergencyname;
+//       break;
+//     }
+//     case 2: {
+//       const { aadharno, panno, studentid } = req.body;
 
-      if (req.files?.aadharimage) {
-        const upload = await uploadToCloudinary(
-          req.files.aadharimage[0].buffer,
-          "onboarding/aadhar",
-          `${userId}-aadhar`
-        );
-        user.documents.aadhar.image = upload.secure_url;
-      }
+//       if (req.files?.aadharimage) {
+//         const upload = await uploadToCloudinary(
+//           req.files.aadharimage[0].buffer,
+//           "onboarding/aadhar",
+//           `${userId}-aadhar`
+//         );
+//         user.documents.aadhar.image = upload.secure_url;
+//       }
 
-      if (req.files?.panimage) {
-        const upload = await uploadToCloudinary(
-          req.files.panimage[0].buffer,
-          "onboarding/pan",
-          `${userId}-pan`
-        );
-        user.documents.pan.image = upload.secure_url;
-      }
+//       if (req.files?.panimage) {
+//         const upload = await uploadToCloudinary(
+//           req.files.panimage[0].buffer,
+//           "onboarding/pan",
+//           `${userId}-pan`
+//         );
+//         user.documents.pan.image = upload.secure_url;
+//       }
 
-      if (req.files?.passportimage) {
-        const upload = await uploadToCloudinary(
-          req.files.passportimage[0].buffer,
-          "onboarding/passport",
-          `${userId}-passport`
-        );
-        user.documents.passportimage = upload.secure_url;
-      }
+//       if (req.files?.passportimage) {
+//         const upload = await uploadToCloudinary(
+//           req.files.passportimage[0].buffer,
+//           "onboarding/passport",
+//           `${userId}-passport`
+//         );
+//         user.documents.passportimage = upload.secure_url;
+//       }
 
-      if (req.files?.collegeid) {
-        const upload = await uploadToCloudinary(
-          req.files.collegeid[0].buffer,
-          "onboarding/college",
-          `${userId}-college`
-        );
-        user.Qualificationdetails.studentid = upload.secure_url;
-      }
+//       if (req.files?.collegeid) {
+//         const upload = await uploadToCloudinary(
+//           req.files.collegeid[0].buffer,
+//           "onboarding/college",
+//           `${userId}-college`
+//         );
+//         user.Qualificationdetails.studentid = upload.secure_url;
+//       }
 
-      user.documents.aadhar.number = aadharno;
-      user.documents.pan.number = panno;
-      break;
-    }
-    case 3: {
-      const {
-        highestqualification,
-        collegename,
-        coursename,
-        year,
-        expectedgraduation
-      } = req.body;
+//       user.documents.aadhar.number = aadharno;
+//       user.documents.pan.number = panno;
+//       break;
+//     }
+//     case 3: {
+//       const {
+//         highestqualification,
+//         collegename,
+//         coursename,
+//         year,
+//         expectedgraduation
+//       } = req.body;
 
-      user.Qualificationdetails.highestqualification = highestqualification;
-      user.Qualificationdetails.collegename = collegename;
-      user.Qualificationdetails.coursename = coursename;
-      user.Qualificationdetails.year = year;
-      user.Qualificationdetails.expectedgraduation = expectedgraduation;
-      break;
-    }
-    case 5: {
-      const {
-        acholdername,
-        accountno,
-        ifsc,
-        bankname,
-        branchname,
-        upi
-      } = req.body;
+//       user.Qualificationdetails.highestqualification = highestqualification;
+//       user.Qualificationdetails.collegename = collegename;
+//       user.Qualificationdetails.coursename = coursename;
+//       user.Qualificationdetails.year = year;
+//       user.Qualificationdetails.expectedgraduation = expectedgraduation;
+//       break;
+//     }
+//     case 5: {
+//       const {
+//         acholdername,
+//         accountno,
+//         ifsc,
+//         bankname,
+//         branchname,
+//         upi
+//       } = req.body;
 
-      user.bankdetails = {
-        acholdername,
-        accountno,
-        ifsc,
-        bankname,
-        branchname,
-        upi
-      };
-      break;
-    }
-    case 6: {
-      const { laptoptype, github, portfolio, linkedin,operatingsystem } = req.body;
+//       user.bankdetails = {
+//         acholdername,
+//         accountno,
+//         ifsc,
+//         bankname,
+//         branchname,
+//         upi
+//       };
+//       break;
+//     }
+//     case 6: {
+//       const { laptoptype, github, portfolio, linkedin,operatingsystem } = req.body;
 
-      user.systemdetails.laptoptype = laptoptype;
-      user.systemdetails.os=operatingsystem
-      user.systemdetails.github = github;
-      user.systemdetails.portfolio = portfolio;
-      user.systemdetails.Linkedin = linkedin;
-      break;
-    }
-    case 7: {
-      user.onboarding.status = "Completed";
-      user.onboarding.completedAt = new Date();
-      break;
-    }
+//       user.systemdetails.laptoptype = laptoptype;
+//       user.systemdetails.os=operatingsystem
+//       user.systemdetails.github = github;
+//       user.systemdetails.portfolio = portfolio;
+//       user.systemdetails.Linkedin = linkedin;
+//       break;
+//     }
+//     case 7: {
+//       user.onboarding.status = "Completed";
+//       user.onboarding.completedAt = new Date();
+//       break;
+//     }
 
-    default:
-      throw new Apierror(400, "Invalid onboarding step");
-  }
+//     default:
+//       throw new Apierror(400, "Invalid onboarding step");
+//   }
 
-  await user.save({ validateBeforeSave: false });
+//   await user.save({ validateBeforeSave: false });
 
-  return res.status(200)
-  .json(new Apiresponse(200,
-      {
-        step,
-        onboardingStatus: user.onboarding.status
-      },
-      `Onboarding step ${step} saved`
-    )
-  );
-};
+//   return res.status(200)
+//   .json(new Apiresponse(200,
+//       {
+//         step,
+//         onboardingStatus: user.onboarding.status
+//       },
+//       `Onboarding step ${step} saved`
+//     )
+//   );
+// };
 
 
 
-export {onboardingdetails,employeelogin,getuser,addsubtask,getsubtask,taskcompleted,acknowledge,updatetask,punchout,startAttendance,reviewtask,sendcomment,completetask,submitreport}
+export {employeelogin,getuser,addsubtask,getsubtask,taskcompleted,acknowledge,updatetask,punchout,startAttendance,reviewtask,sendcomment,completetask,submitreport}

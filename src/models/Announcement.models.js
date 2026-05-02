@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import { atlasConnection } from "../database/dbconnect.js"
 
 const AnnouncementSchema = new mongoose.Schema({
     type:{
@@ -77,4 +76,4 @@ acknowledged:[{
 
 },{timestamps:true})
 
-export const Announcement = atlasConnection.model("Announcement",AnnouncementSchema)
+export const Announcement = mongoose.model("Announcement",AnnouncementSchema)

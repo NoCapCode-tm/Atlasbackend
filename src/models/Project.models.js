@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
 import { Counter } from "./counter.models.js";
-import { atlasConnection } from "../database/dbconnect.js";
 
 
 const ProjectSchema = new mongoose.Schema({
@@ -143,4 +142,4 @@ const ProjectSchema = new mongoose.Schema({
 //   next();
 // });
 
-export const Project  =  atlasConnection.model("Project",ProjectSchema)
+export const Project  =  mongoose.model("Project",ProjectSchema)

@@ -1,5 +1,5 @@
 import {Router} from "express"
-import { acknowledge, addsubtask, completetask, employeelogin, getsubtask, onboardingdetails, punchout, reviewtask, saveTime, sendcomment, startAttendance, submitreport, taskcompleted, updatetask, uploadTaskAttachment } from "../controller/Employee.controller.js"
+import { acknowledge, addsubtask, completetask, employeelogin, getsubtask, punchout, reviewtask, saveTime, sendcomment, startAttendance, submitreport, taskcompleted, updatetask, uploadTaskAttachment } from "../controller/Employee.controller.js"
 import { verifyjwt } from "../middleware/auth.middleware.js"
 import { getuser } from "../controller/Admin.controller.js"
 import { upload } from "../middleware/multer.middleware.js"
@@ -31,16 +31,16 @@ employeerouter.route("/getuser").get(verifyjwt,getuser)
 employeerouter.route("/getsubtask").get(getsubtask)
 
 //patch api
-employeerouter.route("/onboarding/:step").patch(
-  verifyjwt,
-  upload.fields([
-    { name: "aadharimage", maxCount: 1 },
-    { name: "panimage", maxCount: 1 },
-    { name: "passportimage", maxCount: 1 },
-    { name: "collegeid", maxCount: 1 }
-  ]),
-  onboardingdetails
-);
+// employeerouter.route("/onboarding/:step").patch(
+//   verifyjwt,
+//   upload.fields([
+//     { name: "aadharimage", maxCount: 1 },
+//     { name: "panimage", maxCount: 1 },
+//     { name: "passportimage", maxCount: 1 },
+//     { name: "collegeid", maxCount: 1 }
+//   ]),
+//   onboardingdetails
+// );
 
 
 

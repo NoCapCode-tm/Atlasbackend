@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { atlasConnection } from "../database/dbconnect.js"
+
 
 const RoleSchema = mongoose.Schema({
     rolename:{
@@ -35,4 +35,4 @@ const RoleSchema = mongoose.Schema({
     }]
 },{timestamps:true})
 
-export const Role = atlasConnection.model("Role",RoleSchema)
+export const Role = mongoose.model("Role",RoleSchema)

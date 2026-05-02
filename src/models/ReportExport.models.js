@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { atlasConnection } from "../database/dbconnect.js";
+
 
 const reportExportSchema = new mongoose.Schema(
   {
@@ -70,7 +70,7 @@ const reportExportSchema = new mongoose.Schema(
   }
 );
 
-export const ReportExport = atlasConnection.model(
+export const ReportExport = mongoose.model(
   "ReportExport",
   reportExportSchema
 );
