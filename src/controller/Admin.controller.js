@@ -545,7 +545,7 @@ const addemployee = asynchandler(async(req,res)=>{
         text-align:center;
       ">
         <img
-          src="https://raw.githubusercontent.com/NoCapCode-tm/NoCapCode/refs/heads/main/public/atlas.png"
+          src="https://raw.githubusercontent.com/NoCapCode-tm/Atlasbackend/refs/heads/main/public/atlas.png"
           alt="NoCapCode"
           width="52"
           style="display:block; margin:0 auto 12px;"
