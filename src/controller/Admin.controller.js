@@ -288,9 +288,7 @@ const addemployee = asynchandler(async(req,res)=>{
           empid,
           name,
           Emails:{
-            email:{
-              email
-            }
+            email:email
           },
           password,
           status:"Onboarding",
