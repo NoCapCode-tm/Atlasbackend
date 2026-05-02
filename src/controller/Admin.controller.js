@@ -287,7 +287,11 @@ const addemployee = asynchandler(async(req,res)=>{
         const user = await User.create({
           empid,
           name,
-          email,
+          Emails:{
+            email:{
+              email
+            }
+          },
           password,
           status:"Onboarding",
         })
