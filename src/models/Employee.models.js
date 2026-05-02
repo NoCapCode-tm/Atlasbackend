@@ -1,13 +1,15 @@
 import mongoose from "mongoose"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-
-
 const UserSchema = new mongoose.Schema({
     name:{
         type:String,
         trim:true,
         required:true,
+    },
+    signature:{
+         type:String,
+      unique:true,
     },
     empid:{
       type:String,
@@ -18,7 +20,8 @@ const UserSchema = new mongoose.Schema({
         ref:"Role",
         default:null
     },
-    email:{
+    Emails:{
+        email:{
         type:String,
         required:true,
         lowercase:true,
@@ -31,15 +34,30 @@ const UserSchema = new mongoose.Schema({
         trim:true,
         default:""
     },
+    },
+    
     address:{
         permanent:{
             type:String,
+            default:"",
+        },
+        state:{
+             type:String,
+            default:"",
+        },
+        city:{
+             type:String,
+            default:"",
+        },
+        country:{
+             type:String,
             default:"",
         },
         communication:{
             type:String,
             default:"",
         },
+
     },
     emergency:{
         contactnumber:{
@@ -47,6 +65,18 @@ const UserSchema = new mongoose.Schema({
              default:"",
         },
         contactname:{
+             type:String,
+             default:"",
+        },
+        contactemail:{
+             type:String,
+             default:"",
+        },
+        contactrelation:{
+             type:String,
+             default:"",
+        },
+        contactcountry:{
              type:String,
              default:"",
         }
@@ -65,10 +95,17 @@ const UserSchema = new mongoose.Schema({
     },
 
     phone:{
-        type:String,
+        permanent:{
+        type:Number,
         unique:true,
         sparse:true
     },
+     alternate:{
+        type:Number,
+        unique:true,
+        sparse:true
+    },
+},
     salary:{
         amount:{
            type:Number,
@@ -154,7 +191,7 @@ ticketsraised:[{
     ref:"Ticket"
 }],
 documents:{
-    aadhar:{
+    govid1:{
        image:{
         type:String,
         default:"",
@@ -165,7 +202,7 @@ documents:{
         }
 
     },
-   pan:{
+   govid2:{
        image:{
         type:String,
          default:""
@@ -232,13 +269,8 @@ department:{
         default: ""
         },
     },
-    systemdetails:{
-        laptoptype:{
-            type:"String",
-            enum:["Personal","Company Provided"],
-            default:null
-        },
-        github:{
+    professionaldetails:{
+      github:{
             type: String,
             default: ""
         },
@@ -248,16 +280,70 @@ department:{
         },
         Linkedin:{
             type: String,
+            default: ""
+        },
+        Previousexperience:[{
+            companyname:{
+                type: String,
+                default:"",
+            },
+            role:{
+                type: String,
+                default:"",
+            },
+            duration:{
+                type: String,
+                default:"",
+            },
+            responsibilities:{
+                type: String,
+                default:"",
+            },
+
+        }],
+        technical:[{
+            type: String,
             default:"",
+        }],
+        expertise:[{
+            type: String,
+            default:"",
+        }],
+
+    },
+    systemdetails:{
+        laptopavailaibility:{
+            type:Boolean,
+            default:false
+        },
+
+        devicetype:{
+            type:"String",
+            enum:["Personal","Company Provided"],
+            default:null
         },
         os:{
             type: String,
             default:"",
-        }
+        },
+        internet:{
+              type: String,
+            enum:["High","Moderate","Limited"]   
+        },
+        timezone:{
+             type: String,
+            default:"",
+        },
+        weeklyavailaibility:{
+            type: String,
+            default:"",
+        },
+
     },
     
 bankdetails:{
-    acholdername:{
+    Indian:{
+       acholdername:{
         type:String,
         default:""
     },
@@ -282,6 +368,30 @@ bankdetails:{
         type:String,
         default:""
     }
+    },
+    International:{
+       acholdername:{
+        type:String,
+        default:""
+    },
+    accountno:{
+        type:Number,
+        default:""
+    },
+    swift:{
+        type:String,
+        
+        default:""
+    },
+    bankname:{
+        type:String,
+        default:""
+    },
+    platform:{
+        type:String,
+        default:""
+    },
+    },
 },
 notifications:[{
     title:{
