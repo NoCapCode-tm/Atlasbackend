@@ -511,7 +511,7 @@ const addemployee = asynchandler(async(req,res)=>{
       to: [email],
       subject: "Your DOX Access is Ready - Complete Onboarding",
      html: `
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -530,13 +530,20 @@ const addemployee = asynchandler(async(req,res)=>{
 
           <!-- HEADER -->
           <tr>
-            <td align="center" style="padding:32px 24px 20px; background: linear-gradient(120deg, #0A0E14 0%, #112B53 52%, #0A0E14 100%);">
+            <td align="center" style="padding:32px 24px 24px; background: linear-gradient(120deg, #0A0E14 0%, #112B53 52%, #0A0E14 100%);">
+              
               <img 
                 src="https://dox.nocapcode.cloud/doxlogo.png"
-                width="80"
+                width="100"
                 alt="DOX"
-                style="display:block; opacity:0.95;"
+                style="display:block; opacity:0.95; margin-bottom:10px;"
               />
+          
+              <!-- SUBTEXT UNDER LOGO -->
+              <div style="color: rgba(255,255,255,0.65); font-size:12px; letter-spacing:0.5px;">
+                Access Portal
+              </div>
+          
             </td>
           </tr>
 
@@ -549,10 +556,6 @@ const addemployee = asynchandler(async(req,res)=>{
                 Welcome to NoCapCode™
               </div>
               
-              <!-- SUBTEXT -->
-            <div style="color: rgba(255,255,255,0.65); font-size:12px; letter-spacing:0.5px;">
-              Employee Onboarding
-            </div>
 
               <div style="height:15px;"></div>
 
@@ -574,22 +577,20 @@ const addemployee = asynchandler(async(req,res)=>{
                       ACCESS DETAILS
                     </div>
 
-                      <!-- Employee ID -->
-                      <div style="font-size:11px; color:#9ca3af; letter-spacing:0.5px;">
-                        EMPLOYEE ID
-                      </div>
-                      <div style="font-size:16px; color:#111; font-weight:600; margin-bottom:12px; font-family:monospace;">
-                        ${empid}
-                      </div>
+                    <!-- Employee ID -->
+                    <div style="font-size:11px; color:#9ca3af; letter-spacing:0.5px;">
+                      EMPLOYEE ID
+                    </div>
+                    <div style="font-size:16px; color:#111; font-weight:600; margin-bottom:12px; font-family:monospace;">
+                      ${empid}
+                    </div>
 
-                      <!-- Password -->
-                      <div style="font-size:11px; color:#9ca3af; letter-spacing:0.5px;">
-                        TEMPORARY ACCESS CREDENTIAL
-                      </div>
-                      <div style="font-size:16px; color:#111; font-weight:600; font-family:monospace;">
-                        ${password}
-                      </div>
-
+                    <!-- Password -->
+                    <div style="font-size:11px; color:#9ca3af; letter-spacing:0.5px;">
+                      TEMPORARY ACCESS CREDENTIAL
+                    </div>
+                    <div style="font-size:16px; color:#111; font-weight:600; font-family:monospace;">
+                      ${password}
                     </div>
 
                   </td>
@@ -666,7 +667,6 @@ const addemployee = asynchandler(async(req,res)=>{
       <!-- FOOTER -->
       <table width="600" cellpadding="0" cellspacing="0" style="margin-top:20px; text-align:center; color:#777; font-size:12px;">
       
-        <!-- Support -->
         <tr>
           <td style="padding:20px;">
             If you have any questions, contact us at 
@@ -676,19 +676,16 @@ const addemployee = asynchandler(async(req,res)=>{
           </td>
         </tr>
       
-        <!-- LinkedIn Icon -->
         <tr>
           <td style="padding-bottom:10px;">
             <a href="https://www.linkedin.com/company/nocapcode" target="_blank" style="text-decoration:none;">
-              <!-- Inline SVG (email-safe for most modern clients) -->
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#111" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#111">
                 <path d="M20.447 20.452H16.893V14.847C16.893 13.522 16.868 11.813 15.049 11.813C13.205 11.813 12.923 13.248 12.923 14.754V20.452H9.368V9H12.782V10.561H12.829C13.306 9.659 14.468 8.707 16.221 8.707C19.897 8.707 20.447 11.07 20.447 14.138V20.452ZM5.337 7.433C4.196 7.433 3.27 6.507 3.27 5.367C3.27 4.227 4.196 3.301 5.337 3.301C6.477 3.301 7.403 4.227 7.403 5.367C7.403 6.507 6.477 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452Z"/>
               </svg>
             </a>
           </td>
         </tr>
       
-        <!-- Navigation -->
         <tr>
           <td style="padding-bottom:10px;">
             <a href="https://nocapcode.cloud" target="_blank" style="color:#999; text-decoration:none; margin:0 8px;">Home</a>
@@ -699,7 +696,6 @@ const addemployee = asynchandler(async(req,res)=>{
           </td>
         </tr>
       
-        <!-- Address -->
         <tr>
           <td style="padding-top:5px; color:#999;">
             NoCapCode, Inc. ・ Santa Fe ・ New Mexico 87501, USA
