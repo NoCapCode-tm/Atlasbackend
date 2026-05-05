@@ -509,7 +509,7 @@ const addemployee = asynchandler(async(req,res)=>{
          await resend.emails.send({
       from: `DOX <${process.env.SMTP_USER}>`,
       to: [email],
-      subject: "Onboarding Access Created | Ἄτλας Portal Credentials (NoCapCode™)",
+      subject: "Your DOX Access is Ready - Complete Onboarding",
      html: `
   <!DOCTYPE html>
 <html>
@@ -533,7 +533,7 @@ const addemployee = asynchandler(async(req,res)=>{
             <td align="center" style="padding:32px 24px 20px; background: linear-gradient(120deg, #0A0E14 0%, #112B53 52%, #0A0E14 100%);">
               <img 
                 src="https://dox.nocapcode.cloud/doxlogo.png"
-                width="120"
+                width="80"
                 alt="DOX"
                 style="display:block; opacity:0.95;"
               />
@@ -579,7 +579,7 @@ const addemployee = asynchandler(async(req,res)=>{
                         EMPLOYEE ID
                       </div>
                       <div style="font-size:16px; color:#111; font-weight:600; margin-bottom:12px; font-family:monospace;">
-                         ${empid}
+                        ${empid}
                       </div>
 
                       <!-- Password -->
@@ -587,7 +587,7 @@ const addemployee = asynchandler(async(req,res)=>{
                         TEMPORARY ACCESS CREDENTIAL
                       </div>
                       <div style="font-size:16px; color:#111; font-weight:600; font-family:monospace;">
-                         ${password}
+                        ${password}
                       </div>
 
                     </div>
