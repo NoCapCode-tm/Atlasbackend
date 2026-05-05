@@ -507,181 +507,210 @@ const addemployee = asynchandler(async(req,res)=>{
 // };
          const resend = new Resend(process.env.RESEND_API_KEY);
          await resend.emails.send({
-      from: `Atlas <${process.env.SMTP_USER}>`,
+      from: `DOX <${process.env.SMTP_USER}>`,
       to: [email],
       subject: "Onboarding Access Created | Ἄτλας Portal Credentials (NoCapCode™)",
      html: `
   <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Onboarding Access</title>
+  <meta charset="UTF-8">
+  <title>Dox</title>
 </head>
 
-<body style="
-  margin:0;
-  padding:0;
-  background:#F4F6F8;
-  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-">
+<body style="margin:0; padding:0; background:#f4f6f9; font-family:Arial, sans-serif;">
 
-<table width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td align="center" style="padding:48px 16px;">
-
-  <!-- Container -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="
-    max-width:640px;
-    background:#FFFFFF;
-    border-radius:12px;
-    box-shadow:0 12px 32px rgba(0,0,0,0.08);
-    overflow:hidden;
-  ">
-
-    <!-- Header -->
+  <!-- Wrapper -->
+  <table width="100%" cellspacing="0" cellpadding="0" style="padding:40px 0;">
     <tr>
-      <td style="
-        padding:32px;
-        background:#0F1115;
-        text-align:center;
-      ">
-        <img
-          src="https://raw.githubusercontent.com/NoCapCode-tm/Atlasbackend/refs/heads/main/public/atlas.png"
-          alt="NoCapCode"
-          width="52"
-          style="display:block; margin:0 auto 12px;"
-        />
+      <td align="center">
 
-        <h1 style="
-          margin:0;
-          font-size:20px;
-          font-weight:600;
-          color:#FFFFFF;
-          letter-spacing:0.3px;
-        ">
-          Aτλας <br>
-          Onboarding Portal
-        </h1>
+        <!-- Main Card -->
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.05);">
 
-        <p style="
-          margin:8px 0 0;
-          font-size:12px;
-          color:#B6BBC7;
-        ">
-          NoCapCode™ · Internal Human Resources System
-        </p>
-      </td>
-    </tr>
-
-    <!-- Content -->
-    <tr>
-      <td style="padding:36px; color:#1F2937;">
-
-        <!-- Greeting -->
-        <p style="margin:0 0 18px; font-size:14.5px;">
-          Dear <strong>${name.split(" ")[0]}</strong>,
-        </p>
-
-        <!-- Section: Purpose -->
-        <p style="margin:0 0 18px; font-size:14.5px; line-height:1.7;">
-          This email confirms that your onboarding access has been created in
-          <strong>Aτλας</strong>, the internal onboarding and operations portal of
-          <strong>NoCapCode™</strong>.
-        </p>
-
-        <!-- Section: What to do -->
-        <p style="margin:0 0 18px; font-size:14.5px; line-height:1.7;">
-          You are required to log in to the portal and complete your onboarding application,
-          which includes personal details, documentation, and required declarations.
-          Timely completion ensures a smooth onboarding process.
-        </p>
-
-        <!-- Section: Credentials -->
-        <p style="margin:0 0 12px; font-size:14.5px; font-weight:600;">
-          Your login credentials are provided below:
-        </p>
-
-        <table width="100%" cellpadding="0" cellspacing="0" style="
-          background:#F9FAFB;
-          border-radius:10px;
-          padding:20px;
-          border:1px solid #E5E7EB;
-        ">
+          <!-- HEADER -->
           <tr>
-            <td>
+            <td align="center" style="padding:32px 24px 20px; background: linear-gradient(120deg, #0A0E14 0%, #112B53 52%, #0A0E14 100%);">
+              <img 
+                src="https://dox.nocapcode.cloud/doxlogo.png"
+                width="120"
+                alt="DOX"
+                style="display:block; opacity:0.95;"
+              />
+            </td>
+          </tr>
 
-              <p style="margin:0 0 4px; font-size:12px; color:#6B7280;">
-                Employee ID
-              </p>
-              <p style="margin:0 0 14px; font-size:15px; font-weight:600;">
-                ${empid}
-              </p>
+          <!-- BODY -->
+          <tr>
+            <td style="padding:40px;">
 
-              <p style="margin:0 0 4px; font-size:12px; color:#6B7280;">
-                Temporary Password
-              </p>
-              <p style="margin:0; font-size:15px; font-weight:600;">
-                ${password}
-              </p>
+              <!-- Heading -->
+              <div style="font-size:15px; font-weight:bold; color:#111;">
+                Welcome to NoCapCode™
+              </div>
+              
+              <!-- SUBTEXT -->
+            <div style="color: rgba(255,255,255,0.65); font-size:12px; letter-spacing:0.5px;">
+              Employee Onboarding
+            </div>
+
+              <div style="height:15px;"></div>
+
+              <!-- Intro -->
+              <div style="font-size:14px; color:#555; line-height:1.6;">
+                Dear <strong>${name.split(" ")[0]}</strong>,<br><br>
+                Your onboarding access has been provisioned on <b>DOX</b>. Please complete onboarding to activate access across internal systems.
+              </div>
+
+              <div style="height:25px;"></div>
+
+              <!-- ACCESS DETAILS CONTAINER -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background:#f1f3f6; border-radius:10px; padding:20px;">
+
+                    <!-- Title -->
+                    <div style="font-size:12px; color:#666; margin-bottom:12px; font-weight:bold;">
+                      ACCESS DETAILS
+                    </div>
+
+                      <!-- Employee ID -->
+                      <div style="font-size:11px; color:#9ca3af; letter-spacing:0.5px;">
+                        EMPLOYEE ID
+                      </div>
+                      <div style="font-size:16px; color:#111; font-weight:600; margin-bottom:12px; font-family:monospace;">
+                         ${empid}
+                      </div>
+
+                      <!-- Password -->
+                      <div style="font-size:11px; color:#9ca3af; letter-spacing:0.5px;">
+                        TEMPORARY ACCESS CREDENTIAL
+                      </div>
+                      <div style="font-size:16px; color:#111; font-weight:600; font-family:monospace;">
+                         ${password}
+                      </div>
+
+                    </div>
+
+                  </td>
+                </tr>
+              </table>
+
+              <div style="height:25px;"></div>
+
+            <!-- CTA -->
+            <style>
+              @media screen {
+                .cta-wrap:hover .cta-inner {
+                  background: linear-gradient(120deg, #0A0E14 0%, #112B53 52%, #0A0E14 100%) !important;
+                  color: #ffffff !important;
+                }
+            
+                .cta-inner {
+                  transition: all 0.35s ease !important;
+                }
+              }
+            </style>
+            
+            <div style="text-align:center;">
+              <a href="https://dox.nocapcode.cloud" 
+                 class="cta-wrap"
+                 style="
+                   display:inline-block;
+                   padding:2px;
+                   border-radius:8px;
+                   background: linear-gradient(120deg, #0A0E14 0%, #112B53 52%, #0A0E14 100%);
+                   text-decoration:none;
+                 ">
+            
+                <span class="cta-inner"
+                  style="
+                    display:block;
+                    padding:14px 28px;
+                    border-radius:6px;
+                    background:#ffffff;
+                    color:#112B53;
+                    font-weight:bold;
+                    font-family:Arial, sans-serif;
+                    text-align:center;
+                    transition: all 0.35s ease;
+                  ">
+                  Start Onboarding
+                </span>
+            
+              </a>
+            </div>
+            
+              <div style="height:25px;"></div>
+
+              <!-- Combined Content -->
+              <div style="font-size:14px; color:#555; line-height:1.6;">
+                You will be required to set a new password upon your first login.<br><br>
+
+                Please complete your onboarding by submitting profile details, required documents, and mandatory declarations.<br><br>
+
+                This email contains system-generated temporary access credentials. Do not share your credentials, and update your password immediately. NoCapCode™ will never request your password via email or phone. If you did not expect this email, please ignore it or report it to IT.<br><br>
+
+                Complete your onboarding within <b>24 hours</b> to avoid restricted access.<br><br>
+
+                For the best experience, use an updated browser (Chrome, Edge, or Safari), ensure a stable internet connection, and access via a desktop or laptop.<br><br>
+
+                We look forward to having you onboard.
+              </div>
 
             </td>
           </tr>
+
         </table>
 
-        <!-- Section: Security -->
-        <p style="margin:20px 0 0; font-size:13.5px; line-height:1.7;">
-          For security purposes, you will be prompted to change your password upon first login.
-          Please do not share your credentials with anyone.
-        </p>
-
-        <!-- CTA -->
-        <div style="margin-top:32px; text-align:center;">
-          <a href="https://nocapcode.cloud/#/login" style="
-            display:inline-block;
-            background:#111827;
-            color:#FFFFFF;
-            text-decoration:none;
-            padding:12px 34px;
-            border-radius:10px;
-            font-size:13.5px;
-            font-weight:600;
-            letter-spacing:0.2px;
-          ">
-            Continue Onboarding Process
-          </a>
-        </div>
+      <!-- FOOTER -->
+      <table width="600" cellpadding="0" cellspacing="0" style="margin-top:20px; text-align:center; color:#777; font-size:12px;">
+      
+        <!-- Support -->
+        <tr>
+          <td style="padding:20px;">
+            If you have any questions, contact us at 
+            <a href="mailto:hr@nocapcode.cloud" style="color:#4f46e5; text-decoration:none;">
+              hr@nocapcode.cloud
+            </a>
+          </td>
+        </tr>
+      
+        <!-- LinkedIn Icon -->
+        <tr>
+          <td style="padding-bottom:10px;">
+            <a href="https://www.linkedin.com/company/nocapcode" target="_blank" style="text-decoration:none;">
+              <!-- Inline SVG (email-safe for most modern clients) -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#111" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;">
+                <path d="M20.447 20.452H16.893V14.847C16.893 13.522 16.868 11.813 15.049 11.813C13.205 11.813 12.923 13.248 12.923 14.754V20.452H9.368V9H12.782V10.561H12.829C13.306 9.659 14.468 8.707 16.221 8.707C19.897 8.707 20.447 11.07 20.447 14.138V20.452ZM5.337 7.433C4.196 7.433 3.27 6.507 3.27 5.367C3.27 4.227 4.196 3.301 5.337 3.301C6.477 3.301 7.403 4.227 7.403 5.367C7.403 6.507 6.477 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452Z"/>
+              </svg>
+            </a>
+          </td>
+        </tr>
+      
+        <!-- Navigation -->
+        <tr>
+          <td style="padding-bottom:10px;">
+            <a href="https://nocapcode.cloud" target="_blank" style="color:#999; text-decoration:none; margin:0 8px;">Home</a>
+            |
+            <a href="https://nocapcode.cloud/#/about" target="_blank" style="color:#999; text-decoration:none; margin:0 8px;">About</a>
+            |
+            <a href="https://nocapcode.cloud/#/contact" target="_blank" style="color:#999; text-decoration:none; margin:0 8px;">Contact</a>
+          </td>
+        </tr>
+      
+        <!-- Address -->
+        <tr>
+          <td style="padding-top:5px; color:#999;">
+            NoCapCode, Inc. ・ Santa Fe ・ New Mexico 87501, USA
+          </td>
+        </tr>
+      
+      </table>
 
       </td>
     </tr>
-
-    <!-- Footer -->
-    <tr>
-      <td style="
-        padding:24px 32px;
-        background:#F9FAFB;
-        border-top:1px solid #E5E7EB;
-        text-align:center;
-      ">
-        <p style="margin:0; font-size:11.5px; color:#6B7280; line-height:1.6;">
-          This is a system-generated message. Please do not reply to this email.  
-          <br/>
-          For any onboarding-related queries, contact the HR team through official channels.
-          <br/><br/>
-          <strong>NoCapCode™</strong> · Human Resources Systems · Aτλας Portal
-        </p>
-      </td>
-    </tr>
-
   </table>
-
-  <p style="margin-top:22px; font-size:11px; color:#9CA3AF; text-align:center;">
-    This communication contains confidential information and is intended only for the designated recipient.
-  </p>
-
-</td>
-</tr>
-</table>
 
 </body>
 </html>
