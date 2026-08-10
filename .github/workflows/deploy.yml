@@ -44,6 +44,6 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
-            cd ~/Aws-setup
+            cd ~/NCC_BACKEND/B_Atlas_NCC
             sudo docker compose pull
             sudo docker compose up -d
