@@ -9,7 +9,7 @@ const allowedOrigins = [
   // "http://localhost:3001",
   "https://nocapcode.cloud",
   "https://atlas.nocapcode.cloud",
-  "https://atlas-7izi9d6d3-infra16.vercel.app",
+  "https://atlas-infra16.vercel.app",
 ];
 
 
