@@ -21,15 +21,7 @@ const generateTeamID = () => {
   return `P00${random}`;
 };
 
-// const transporter = nodemailer.createTransport({
-//   host: "gvam1102.siteground.biz",
-//   port: 465,
-//   secure: true,
-//   auth: {
-//     user: process.env.SMTP_USER,
-//     pass: process.env.SMTP_PASS,
-//   },
-// });
+
 
   const handlesubject = ({type}) =>{
   if(type==="General Announcement"){
