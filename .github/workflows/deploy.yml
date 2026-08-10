@@ -46,5 +46,5 @@ jobs:
           passphrase: ${{secrets.DEPLOY_SSH_PASSPHRASE}}
           script: |
             cd ~/NCC_BACKEND/B_Atlas_NCC
-            sudo docker compose pull
-            sudo docker compose up -d
+            docker compose pull
+            docker compose up -d
