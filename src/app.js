@@ -30,6 +30,13 @@ app.use(
   })
 );
 
+// Health check
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    service: "atlas-backend"
+  });
+});
 
 
 
