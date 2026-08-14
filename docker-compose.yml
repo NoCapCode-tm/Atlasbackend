@@ -1,5 +1,3 @@
-
-
 services:
    backend:
     image: nocapcode/atlas_backend:latest
@@ -8,15 +6,6 @@ services:
     ports:
       - "5000:5000"
     restart: unless-stopped
-
-   mongo:
-    image: mongo
-    restart: always
-    volumes: 
-     - mongo-data:/data/db
-
-volumes: 
-  mongo-data:
      
 
   

@@ -9,7 +9,8 @@ const allowedOrigins = [
   // "http://localhost:3001",
   "https://nocapcode.cloud",
   "https://atlas.nocapcode.cloud",
-  "https://atlas-infra16.vercel.app",
+  "https://atlas-ten-wine.vercel.app",
+  
 ];
 
 
@@ -30,6 +31,13 @@ app.use(
   })
 );
 
+// Health check
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    service: "atlas-backend"
+  });
+});
 
 
 
