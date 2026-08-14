@@ -336,11 +336,13 @@ export const saveTime = async (req, res) => {
   });
 
 const sendcomment = asynchandler(async(req,res)=>{
-  const {comment,taskid,userid} = req.body
+  const {comment,taskid} = req.body
 
-  if(!comment || !taskid ||!userid){
+  if(!comment || !taskid){
     throw new Apierror(404,"Please fill all the required fields")
   }
+
+  const userid = req.user._id
 
   const task = await Task.findById(taskid)
   const user = await User.findById(userid)

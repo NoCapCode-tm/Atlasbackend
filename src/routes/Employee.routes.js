@@ -19,7 +19,7 @@ employeerouter.route("/task/upload-attachment").post(verifyjwt,
   upload.single("file"),
   uploadTaskAttachment
 );
-employeerouter.route("/commentsend").post(sendcomment)
+employeerouter.route("/commentsend").post(verifyjwt,sendcomment)
 employeerouter.route("/submitreport").post(submitreport)
 employeerouter.route("/updateuser").put(update)
 
